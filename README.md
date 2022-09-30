@@ -4,4 +4,4 @@
 
 Palautettava sovellus Web-palvelinohjelmointikurssille.
 
-* Sovellus: [Heroku](https://radiant-plains-11174.herokuapp.com/breweries)
+* Sovellus: [Heroku](https://radiant-plains-11174.herokuapp.com/)
