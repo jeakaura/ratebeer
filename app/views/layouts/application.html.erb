@@ -11,6 +11,16 @@
   </head>
 
   <body>
+  <div class="navibar">
+    <b class="logo">RateBeer</b>
+    <%= link_to 'breweries', breweries_path %>
+    <%= link_to 'beers', beers_path %>
+    <%= link_to 'ratings', ratings_path %>
+  </div>
+
+  <div class="paasisalto">
     <%= yield %>
+  </div>
+  
   </body>
 </html>

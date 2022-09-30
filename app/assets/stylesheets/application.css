@@ -1,15 +1,119 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* Sivun yleiset muotoilut */
+body {
+  font-family: system-ui;
+  margin: 0px;
+}
+
+/* Navigaatiopalkki */
+.navibar {
+  padding: 10px;
+  background: wheat;
+}
+
+/* Otsikkopalkki */
+.otsikko {
+  padding: 10px 10px 20px 10px;
+  margin: -10px -10px 0px -10px;
+  background: tomato;
+  color: wheat;
+}
+
+/* Näytetään panimot ja oluet flexboxina */
+#breweries, #beers {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Flexboxin sisältö */
+#breweries > div, #beers > div {
+  background-color: #f1f1f1;
+  flex-grow: 1;
+  border-radius: 3px;
+  margin: 10px;
+  padding: 25px;
+  font-size: 18px;
+}
+
+/* Arvostelujen tai yleisesti listojen muotoilu parittomat */
+ul > li:nth-child(odd) { 
+  border-radius: 3px;
+  background: #f1f1f1;
+  list-style-type: none;
+  padding: 10px;
+  margin: 0px 0px 5px -40px;
+}
+
+/* Arvostelujen tai yleisesti listojen muotoilu parilliset */
+ul > li:nth-child(even) { 
+  border-radius: 3px;
+  background: #dedede;
+  list-style-type: none;
+  padding: 10px;
+  margin: 0px 0px 5px -40px;
+}
+
+/* h1 otsikosta marginit pois */
+h1 {
+  margin: 0px;
+}
+
+/* Pääsisältöön hieman marginia */
+.paasisalto {
+  margin: 10px;
+}
+
+/* Otsikkoalueen tekstikappale */
+.otsikko > p {
+  margin: 10px 10px 10px 0px;
+}
+
+/* Otsikkoalueen h1 ja logon fontti */
+.otsikko > h1, .logo{
+  font-family: Georgia, serif;
+}
+
+/* Linkin muotoilua */
+a:link {
+  color: Tomato;
+}
+
+/* Vieraillun linkin muotoilua */
+a:visited {
+  color: Tomato;
+}
+
+/* Valitun linkin muotoilua */
+a:hover {
+  color: white;
+  background-color: Tomato;
+  text-decoration: none;
+}
+
+/* Otsikkopalkin linkin muotoilua */
+.otsikko > a:link {
+  color: wheat;
+}
+
+/* Otsikkopalkin vieraillun linkin muotoilua */
+.otsikko > a:visited {
+  color: wheat;
+}
+
+/* Otsikkopalkin valitun linkin muotoilua */
+.otsikko > a:hover {
+  color: tomato;
+  background-color: wheat;
+  text-decoration: none;
+}
+
+/* Tekstin "kopioinnin" muotoilua Firefox-selain */
+::-moz-selection {
+  color: white;
+  background: black;
+}
+
+/* Tekstin "kopioinnin" muotoilua */
+::selection {
+  color: white;
+  background: black;
+}

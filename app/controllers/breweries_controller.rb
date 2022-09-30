@@ -1,5 +1,6 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: %i[ show edit update destroy ]
+  before_action :authenticate, only: [:destroy]
 
   # GET /breweries or /breweries.json
   def index
@@ -66,5 +67,29 @@ class BreweriesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def brewery_params
       params.require(:brewery).permit(:name, :year)
+    end
+
+    # Kirjautuminen (melkoinen hässäkkä :--D, mutta täyttää vaatimuksensa)
+    def authenticate
+      admin_accounts = { "pekka" => "beer", "arto" => "foobar", "matti" => "ittam", "vilma" => "kangas" }
+
+      authenticate_or_request_with_http_basic do |username, password|
+        $i = 0
+        $pituus = admin_accounts.count
+        $onko = true
+        while $i < $pituus do
+          if username == admin_accounts.keys[$i] and password == admin_accounts.values[$i]
+            $onko = true
+            return true
+            break
+          else
+            $i += 1
+            $onko = false
+          end
+        end
+        if $onko == false
+          raise "Wrong username or password"
+        end
+      end
     end
 end
