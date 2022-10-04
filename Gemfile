@@ -9,6 +9,8 @@ gem "rails", "~> 7.0.4"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+gem 'bcrypt', '~> 3.1.7'
+
 group :development, :test do
   gem 'sqlite3'
 end

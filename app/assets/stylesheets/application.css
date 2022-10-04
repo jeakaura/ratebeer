@@ -8,6 +8,14 @@ body {
 .navibar {
   padding: 10px;
   background: wheat;
+  text-transform: lowercase;
+}
+
+/* Kirjautunut käyttäjä */
+.userbar {
+  padding: 10px;
+  background: #2d3035;
+  color: wheat;
 }
 
 /* Otsikkopalkki */
@@ -15,6 +23,14 @@ body {
   padding: 10px 10px 20px 10px;
   margin: -10px -10px 0px -10px;
   background: tomato;
+  color: wheat;
+}
+
+/* Otsikkopalkki */
+.otsikko_user {
+  padding: 10px 10px 20px 10px;
+  margin: -10px -10px 0px -10px;
+  background: #2d3035;
   color: wheat;
 }
 
@@ -63,13 +79,14 @@ h1 {
 }
 
 /* Otsikkoalueen tekstikappale */
-.otsikko > p {
+.otsikko > p, .otsikko_user > p {
   margin: 10px 10px 10px 0px;
 }
 
 /* Otsikkoalueen h1 ja logon fontti */
-.otsikko > h1, .logo{
+.otsikko > h1, .otsikko_user > h1, .logo{
   font-family: Georgia, serif;
+  text-transform: none;
 }
 
 /* Linkin muotoilua */

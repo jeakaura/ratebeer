@@ -1,3 +1,4 @@
 <div id="<%= dom_id rating %>">
-    <b> <%= rating.beer.name %> </b> <%= rating.score %>
+    <b> <%= rating.beer.name %> </b> ✳ score: <%= rating.score %>
+    <div style="float: right;"><small>rated by: <%= link_to rating.user.username, rating.user %></small></div>
 </div>

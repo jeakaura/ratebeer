@@ -7,10 +7,7 @@
 <div class="sisalto">
      <ul>
           <% @ratings.each do |rating| %>
-               <li> <%= render rating %> 
-                    <div style="float: right; margin: -20px 0px 0px 0px;"> 
-                         <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }%> 
-                    </div> 
+               <li> <%= render rating %>
                </li>
           <% end %>
      </ul>

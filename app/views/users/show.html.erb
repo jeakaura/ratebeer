@@ -1,0 +1,42 @@
+<div id="<%= dom_id @user %>">
+  <div class="otsikko_user">
+    <h1><%= @user.username %></h1>
+
+    <p>
+  <% if @user.ratings.empty? %>
+    <%= @user.username %> has no ratings!
+  <% else %>
+    <%= @user.username %> has made <%= pluralize(@user.ratings.count, 'rating') %>, average rating <%= @user.ratings.average(:score).round(1) %>
+  <% end %>
+  </p>
+  <%= link_to "Show all users", users_path %>
+  </div>
+
+  <p style="color: green"><%= notice %></p>
+
+  <% if not @user.ratings.empty? %>
+  <p><b>Ratings:</b></p>
+    <ul>
+    <% @user.ratings.each do |rating| %>
+      <li>
+        <b><%= rating.beer.name %></b> &#10035; score: <%= rating.score %>
+        <% if @user == current_user %>
+          <div style="float: right;"> 
+            <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }%> 
+          </div> 
+        <% end %>
+      </li>
+    <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<% if @user == current_user %>
+  <div>
+    <p><b>Settings:</b></p>
+    <p>
+    <%= link_to "Edit your user", edit_user_path(@user) %>
+    </p>
+    <%= button_to "Delete your user", @user, method: :delete %>
+  </div>
+<% end %>
