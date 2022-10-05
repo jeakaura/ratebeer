@@ -6,6 +6,11 @@ class BeersController < ApplicationController
     @beers = Beer.all
   end
 
+  def set_breweries_and_styles_for_template
+    @breweries = Brewery.all
+    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter", "Lowalcohol"]
+  end
+
   # GET /beers/1 or /beers/1.json
   def show
   end
@@ -13,14 +18,12 @@ class BeersController < ApplicationController
   # GET /beers/new
   def new
     @beer = Beer.new
-    @breweries = Brewery.all
-    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter", "Lowalcohol"]
+    set_breweries_and_styles_for_template
   end
 
   # GET /beers/1/edit
   def edit
-    @breweries = Brewery.all
-    @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter", "Lowalcohol"]
+    set_breweries_and_styles_for_template
   end
 
   # POST /beers or /beers.json
@@ -32,8 +35,7 @@ class BeersController < ApplicationController
         format.html { redirect_to beers_path, notice: "Beer was successfully created." }
         format.json { render :show, status: :created, location: @beer }
       else
-        @breweries = Brewery.all
-        @styles = ["Weizen", "Lager", "Pale ale", "IPA", "Porter", "Lowalcohol"]
+        set_breweries_and_styles_for_template
         format.html { render :new }
         format.json { render json: @beer.errors, status: :unprocessable_entity }
       end
