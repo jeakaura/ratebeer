@@ -4,8 +4,10 @@ include Helpers
 
 describe "Oluet" do
     let!(:brewery) { FactoryBot.create :brewery, name: "Koff" }
+    let!(:user) { FactoryBot.create :user }
 
     it "lisääminen onnistuu kelvoilla tiedoilla" do
+        sign_in(username: "Pekka", password: "Foobar1")
         visit new_beer_path
 
         fill_in('beer[name]', with: 'Rainbow Lager')
@@ -19,6 +21,7 @@ describe "Oluet" do
     end
 
     it "lisääminen ei onnistuu epäkelvoilla tiedoilla" do
+        sign_in(username: "Pekka", password: "Foobar1")
         visit new_beer_path
 
         fill_in('beer[name]', with: '')

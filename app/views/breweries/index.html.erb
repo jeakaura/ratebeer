@@ -1,15 +1,11 @@
 <div class="otsikko">
   <h1>Breweries</h1>
   <p>Number of breweries: <%= @breweries.count %></p>
-  <%= link_to "Add new brewery", new_brewery_path %>
+  <%= link_to('New Brewery', new_brewery_path) if current_user %>
 </div>
 
 <div class="sisalto">
   <p style="color: green"><%= notice %></p>
-
-  <p>
-  Putki toimii!
-  </p>
 
   <div id="breweries">
     <% @breweries.each do |brewery| %>

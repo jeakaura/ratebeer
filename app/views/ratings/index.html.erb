@@ -1,7 +1,7 @@
 <div class="otsikko">
-     <h1>List of ratings</h1>
+     <h1>Ratings</h1>
      <p>Number of ratings: <%= @ratings.count %></p>
-     <%= link_to 'Add new rating', new_rating_path %>
+     <%= link_to('New Rating', new_rating_path) if current_user %>
 </div>
 
 <div class="sisalto">
