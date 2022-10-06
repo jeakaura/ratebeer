@@ -7,8 +7,8 @@ class Brewery < ApplicationRecord
   validates :name, length: { minimum: 1 }
 
   validates :year, numericality: { greater_than_or_equal_to: 1040,
-                                    less_than_or_equal_to: 2022,
-                                    only_integer: true }
+                                   less_than_or_equal_to: 2022,
+                                   only_integer: true }
 
   # Tulostaa panimoraportin.
   def print_report
