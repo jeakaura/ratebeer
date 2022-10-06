@@ -15,6 +15,9 @@
   <p style="color: green"><%= notice %></p>
 
   <% if not @user.ratings.empty? %>
+  <p>
+    Favorite Beer: <%= @user.favorite_beer %> & Favorite Brewery: <%= @user.favorite_brewery.name %>.
+  </p>
   <p><b>Ratings:</b></p>
     <ul>
     <% @user.ratings.each do |rating| %>
