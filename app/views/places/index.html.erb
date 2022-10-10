@@ -1,0 +1,36 @@
+<div class="otsikko">
+    <h1>Places</h1>
+    <p>Beer places search</p>
+</div>
+
+<p>
+    <ul>
+        <li>
+            <%= form_with url: places_path, method: :post do |form| %>
+            City <%= form.text_field :city %>
+            <%= form.submit "Search" %>
+            <% end %>
+        </li>
+    </ul>
+</p>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+    <% if @places %>
+    <table>
+        <thead>
+        <% Place.rendered_fields.each do |field| %>
+            <th><%= field %></th>
+        <% end %>
+        </thead>
+        <% @places.each do |place| %>
+        <tr>
+            <% Place.rendered_fields.each do |field| %>
+            <td><%= place.send(field) %></td>
+            <% end %>
+        </tr>
+        <% end %>
+    </table>
+    <% end %>
+</p>
