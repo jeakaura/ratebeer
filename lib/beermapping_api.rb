@@ -22,9 +22,7 @@ class BeermappingApi
     url = "http://beermapping.com/webservice/locquery/#{key}/"
 
     response = HTTParty.get "#{url}#{ERB::Util.url_encode(place_id)}"
-    info = response.parsed_response["bmp_locations"]["location"]
-
-    info
+    response.parsed_response["bmp_locations"]["location"]
   end
 
   def self.key
