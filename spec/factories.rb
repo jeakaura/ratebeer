@@ -10,9 +10,14 @@ FactoryBot.define do
         year { 1900 }
     end
 
+    factory :style do
+        text { "test" }
+        desc { "test" }
+    end
+
     factory :beer do
         name { "anonymous" }
-        style { "Lager" }
+        style
         brewery #olueen liittyvä panimo
     end
 

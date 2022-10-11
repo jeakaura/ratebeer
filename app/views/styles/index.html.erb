@@ -1,0 +1,18 @@
+<div class="otsikko">
+<h1>Styles</h1>
+<p>Number of styles: <%= @styles.count %></p>
+<%= link_to "New style", new_style_path %>
+</div>
+
+<p style="color: green"><%= notice %></p>
+
+<div id="styles">
+<ul>
+  <% @styles.each do |style| %>
+    <li>
+      <p><b>Name:</b> <%= link_to style.text, style %></p>
+      <p><b>Desc:</b> <%= style.desc %></p>
+    </li>
+  <% end %>
+</ul>
+</div>

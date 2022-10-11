@@ -7,6 +7,9 @@
     <%= @user.username %> has no ratings!
   <% else %>
     <%= @user.username %> has made <%= pluralize(@user.ratings.count, 'rating') %>, average rating <%= @user.ratings.average(:score).round(1) %>
+  <p>
+    Favorite Beer: <%= @user.favorite_beer %> & Favorite Brewery: <%= @user.favorite_brewery.name %>.
+  </p>
   <% end %>
   </p>
   <%= link_to "Show all users", users_path %>
@@ -14,10 +17,21 @@
 
   <p style="color: green"><%= notice %></p>
 
+  <% if @user.beer_clubs.empty? %>
+  Has not joined any club
+<% else %>
+  <b>Memberships:</b>
+
+  <ul>
+    <% @user.beer_clubs.each do |club| %>
+      <li>
+        <%= link_to club.name, club %>
+      </il>
+    <% end %>
+  </ul>
+<% end %>
+
   <% if not @user.ratings.empty? %>
-  <p>
-    Favorite Beer: <%= @user.favorite_beer %> & Favorite Brewery: <%= @user.favorite_brewery.name %>.
-  </p>
   <p><b>Ratings:</b></p>
     <ul>
     <% @user.ratings.each do |rating| %>

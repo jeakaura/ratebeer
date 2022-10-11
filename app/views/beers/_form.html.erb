@@ -15,10 +15,15 @@
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
-
+<!--
   <div>
     <%= form.label :style, style: "display: block" %>
     <%= form.select :style, options_for_select(@styles) %>
+  </div>
+-->
+  <div>
+    <%= form.label :style_id, style: "display: block" %>
+    <%= form.select :style_id, options_from_collection_for_select(@styles, :id, :text) %>
   </div>
 
   <div>

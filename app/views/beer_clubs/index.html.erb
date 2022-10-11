@@ -1,0 +1,28 @@
+<div class="otsikko">
+  <h1>Beer clubs</h1>
+  <p>Number of beer clubs: <%= @beer_clubs.count %></p>
+  <%= link_to "New Club", new_beer_club_path if current_user %>
+</div>
+
+<div class="sisalto">
+  <p style="color: green"><%= notice %></p>
+
+  <div id="beer_clubs">
+    <% @beer_clubs.each do |beer_club| %>
+      <div>
+        <p>
+          Name: <%= link_to beer_club.name, beer_club %>
+        </p>
+        <p>
+          Founded: <%= beer_club.founded %>
+        </p>
+        <p>
+          City: <%= beer_club.city %>
+        </p>
+        <p>
+          Members: <%= beer_club.memberships.count %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

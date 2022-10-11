@@ -86,7 +86,7 @@ RSpec.describe User, type: :model do
 
     it "on suosikkityyli, jos useampi arvostelu" do
       kalja = FactoryBot.create(:beer)
-      kalja2 = FactoryBot.create(:beer, style: "Porter")
+      kalja2 = FactoryBot.create(:beer)
       FactoryBot.create(:rating, beer: kalja, score: 15, user: user)
       FactoryBot.create(:rating, beer: kalja2, score: 20, user: user)
       FactoryBot.create(:rating, beer: kalja2, score: 45, user: user)
@@ -108,7 +108,7 @@ RSpec.describe User, type: :model do
 
     it "on suosikkipanimo, jos useampi arvostelu" do
       kalja = FactoryBot.create(:beer)
-      kalja2 = FactoryBot.create(:beer, style: "Porter")
+      kalja2 = FactoryBot.create(:beer)
       FactoryBot.create(:rating, beer: kalja, score: 15, user: user)
       FactoryBot.create(:rating, beer: kalja2, score: 20, user: user)
       FactoryBot.create(:rating, beer: kalja2, score: 45, user: user)
