@@ -1,4 +1,9 @@
 class WeatherApi
+  def self.weather_in(city)
+    city = city.downcase
+    Rails.cache.fetch(city) { get_weather(city) }
+  end
+
   def self.get_weather(city)
     url = "http://api.weatherstack.com/current?access_key=#{key}&query="
 
