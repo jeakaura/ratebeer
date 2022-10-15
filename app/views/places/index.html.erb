@@ -1,29 +1,19 @@
-<div class="otsikko">
-    <h1>Places</h1>
-    <p>Beer places search</p>
-</div>
+<h1>Beer places</h1>
 
 <p>
-    <ul>
-        <li>
-            <%= form_with url: places_path, method: :post do |form| %>
-            City <%= form.text_field :city %>
-            <%= form.submit "Search" %>
-            <% end %>
-        </li>
-    </ul>
+    <%= form_with url: places_path, class: "d-flex", method: :post do |form| %>
+        <%= form.text_field :city, class:"form-control me-2", placeholder:"City" %>
+        <%= form.submit "Search", class:"btn btn-outline-dark" %>
+    <% end %>
 </p>
-
-<p id="notice"><%= notice %></p>
 
 <p>
     <% if @places %>
 
-    <b>The current beer weather in <%= @weather["location"]["name"] %>.</b>
-    <p><%= @weather["current"]["temperature"] %> Celsius</p>
+    <h5>The current beer weather in <%= @weather["location"]["name"] %> is <%= @weather["current"]["temperature"] %> c°</h5>
     <p><b>wind</b> <%= @weather["current"]["wind_speed"] %>, direction: <%= @weather["current"]["wind_dir"]%> </p>
 
-    <table>
+    <table class="table table-striped table-hover">
         <thead>
             <th>id</th>
             <th>name</th>

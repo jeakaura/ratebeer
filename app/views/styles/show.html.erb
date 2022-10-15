@@ -1,10 +1,9 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @style %>
 
-<div>
-  <%= link_to "Edit this style", edit_style_path(@style) %> |
-  <%= link_to "Back to styles", styles_path %>
+<%= edit_and_destroy_buttons(@style) %>
 
-  <%= button_to "Destroy this style", @style, method: :delete %>
-</div>
+<% unless current_user.nil? %>
+<% if current_user.admin == true %>
+    <%= link_to "Destroy", delete_style_path(@style.id), class: "btn btn-outline-danger" %>
+<% end %>
+<% end %>

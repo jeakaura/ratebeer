@@ -3,6 +3,8 @@ module RatingAverage
 
   # Laskee arvosteluiden keskiarvon.
   def average_rating
+    return 0 if ratings.empty?
+
     ratings.average(:score).round(1)
   end
 

@@ -1,0 +1,23 @@
+h1, h2, h3, h4, h5 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Otsikkoalueen h1 ja logon fontti */
+.otsikko > h3, .otsikko_user > h3, .logo{
+    font-family: Georgia, serif;
+    font-weight: bold;
+}
+
+/* Tekstin "kopioinnin" muotoilua Firefox-selain */
+::-moz-selection {
+    color: white;
+    background: black;
+}
+
+/* Tekstin "kopioinnin" muotoilua */
+::selection {
+    color: white;
+    background: black;
+}
+
+@import "bootstrap";

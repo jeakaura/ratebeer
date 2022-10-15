@@ -1,25 +1,19 @@
 class Brewery < ApplicationRecord
-  include RatingAverage
-
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
 
-  validates :name, length: { minimum: 1 }
+  validates :name, presence: true
+  validates :year, numericality: { only_integer: true,
+                                   greater_than: 1039,
+                                   less_than_or_equal_to: ->(_) { Time.now.year } }
 
-  validates :year, numericality: { greater_than_or_equal_to: 1040,
-                                   less_than_or_equal_to: 2022,
-                                   only_integer: true }
+  scope :active, -> { where active: true }
+  scope :retired, -> { where active: [nil, false] }
 
-  # Tulostaa panimoraportin.
-  def print_report
-    puts name
-    puts "established at year #{year}"
-    puts "number of beers #{beers.count}"
-  end
+  include RatingAverage
 
-  # "Käynnistää" panimon uudelleen vuodesta 2022
-  def restart
-    year = 2022
-    puts "changed year to #{year}"
+  def self.top(maks = 3)
+    sorted_by_rating_in_desc_order = Brewery.all.sort_by(&:average_rating).reverse
+    sorted_by_rating_in_desc_order.first(maks)
   end
 end

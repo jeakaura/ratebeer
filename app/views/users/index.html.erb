@@ -1,14 +1,42 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Users</h1>
+<br>
 
+<% if not current_user %>
 <div id="users">
   <% @users.each do |user| %>
-    <%= render user %>
+    <% if user.active %>
+      <%= render user %>
     <p>
-      <%= link_to "Show this user", user %>
+      <%= link_to "Show this user", user, class:"btn btn-outline-primary" %>
+    </p>
+    <% end %>
+  <% end %>
+</div>
+<% elsif not current_user.admin %>
+<div id="users_logger">
+  <% @users.each do |user| %>
+    <% if user.active %>
+      <%= render user %>
+    <p>
+      <%= link_to "Show this user", user, class:"btn btn-outline-primary" %>
+    </p>
+    <% end %>
+  <% end %>
+</div>
+<% else %>
+<div id="users_admin">
+  <% @users.each do |user| %>
+      <%= render user %>
+    <p>
+      <% if not user.active %>
+        <span class="badge text-bg-danger">closed</span>
+      <% elsif user.admin %>
+        <span class="badge text-bg-success">admin</span>
+      <% else %>
+        <span class="badge text-bg-primary">active</span>
+      <% end %>
+      <%= link_to "Show this user", user, class:"btn btn-outline-primary" %>
     </p>
   <% end %>
 </div>
-
-<%= link_to "New user", new_user_path %>
+<% end %>

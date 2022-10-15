@@ -14,14 +14,13 @@
   <%= form_with(model: @rating) do |form| %>
     <%= form.hidden_field :beer_id %>
     score: <%= form.number_field :score %>
-    <%= form.submit "Create rating" %>
+    <%= form.submit "Create rating", class:"btn btn-primary" %>
   <% end %>
+<% end %>
 
-  <p><b>Beer settings:</b></p>
-  <div>
-  <p>
-    <%= link_to "Edit this beer", edit_beer_path(@beer) %>
-  </p>
-    <%= button_to "Destroy this beer", @beer, method: :delete %>
-  </div>
+<%= edit_and_destroy_buttons(@beer) %>
+<% unless current_user.nil? %>
+<% if current_user.admin == true %>
+    <%= link_to "Destroy", delete_beer_path(@beer.id), class: "btn btn-outline-danger" %>
+<% end %>
 <% end %>

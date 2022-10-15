@@ -27,12 +27,6 @@ describe "Arvostelu" do
     expect(beer1.average_rating).to eq(15.0)
   end
 
-  it "kun luotu, näytetään yhteismäärä sivulla" do
-    create_beers_with_many_ratings({user: user}, 10, 20, 15, 7, 9)
-    visit ratings_path
-    expect(page).to have_content "Number of ratings: #{Rating.count}"
-  end
-
   it "vain omat arvostelut näytetään omalla sivulla" do
     create_beers_with_many_ratings({user: user}, 10, 20, 15, 7, 9)
     create_beers_with_many_ratings({user: user2}, 11, 21, 16, 17, 19)

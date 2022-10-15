@@ -8,10 +8,9 @@ class Beer < ApplicationRecord
 
   validates :name, length: { minimum: 1 }
 
-  def average
-    return 0 if ratings.empty?
-
-    ratings.map(&:score).sum / ratings.count.to_f
+  def self.top(maks = 3)
+    sorted_by_rating_in_desc_order = Beer.all.sort_by(&:average_rating).reverse
+    sorted_by_rating_in_desc_order.first(maks)
   end
 
   # Palauttaa oluen tiedot muodossa "OluenNimi (PanimonNimi)"

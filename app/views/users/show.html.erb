@@ -1,45 +1,60 @@
 <div id="<%= dom_id @user %>">
-  <div class="otsikko_user">
-    <h1><%= @user.username %></h1>
 
-    <p>
-  <% if @user.ratings.empty? %>
-    <%= @user.username %> has no ratings!
+<h1>User: <%= @user.username %></h1>
+
+<% unless current_user.nil? %>
+  <% if current_user.admin == true %>
+  <br>
+  <p>
+  User status:
+
+  <% if not @user.active  %>
+      <span class="badge bg-secondary">closed</span>
   <% else %>
-    <%= @user.username %> has made <%= pluralize(@user.ratings.count, 'rating') %>, average rating <%= @user.ratings.average(:score).round(1) %>
+      <span class="badge bg-primary">active</span>
+  <% end %>
+  </p>
+  <% if @user.admin == true %>
+  <small>Not possible to change status of admin account.</small>
+  <% else %>
+  <%= link_to "Change account status", toggle_user_path(@user.id), class: "btn btn-danger" %>
+  <% end %>
+  <br><br>
+  <% end %>
+<% end %>
+
+<% if @user.ratings.empty? %>
+    <%= @user.username %> has no ratings!
+<% else %>
+  <%= @user.username %> has made <%= pluralize(@user.ratings.count, 'rating') %>, average rating <%= @user.ratings.average(:score).round(1) %>
   <p>
     Favorite Beer: <%= @user.favorite_beer %> & Favorite Brewery: <%= @user.favorite_brewery.name %>.
   </p>
-  <% end %>
-  </p>
-  <%= link_to "Show all users", users_path %>
-  </div>
-
-  <p style="color: green"><%= notice %></p>
-
-  <% if @user.beer_clubs.empty? %>
-  Has not joined any club
-<% else %>
-  <b>Memberships:</b>
-
-  <ul>
-    <% @user.beer_clubs.each do |club| %>
-      <li>
-        <%= link_to club.name, club %>
-      </il>
-    <% end %>
-  </ul>
 <% end %>
 
+<br>
+<% if @user.beer_clubs.empty? %>
+  Has not joined any club
+<% else %>
+  <h4>Memberships:</h4>
+
+  <div class="list-group">
+    <% @user.beer_clubs.each do |club| %>
+        <%= link_to club.name, club, class:"list-group-item" %>
+    <% end %>
+  </div>
+<% end %>
+<br>
+
   <% if not @user.ratings.empty? %>
-  <p><b>Ratings:</b></p>
-    <ul>
+  <h4>Ratings:</h4>
+    <ul class="list-group">
     <% @user.ratings.each do |rating| %>
-      <li>
-        <b><%= rating.beer.name %></b> &#10035; score: <%= rating.score %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <%= rating.beer.name %> / score: <%= rating.score %>
         <% if @user == current_user %>
           <div style="float: right;"> 
-            <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }%> 
+            <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class:"btn btn-outline-danger btn-sm"%> 
           </div> 
         <% end %>
       </li>
@@ -47,13 +62,8 @@
     </ul>
   <% end %>
 </div>
+<br>
 
 <% if @user == current_user %>
-  <div>
-    <p><b>Settings:</b></p>
-    <p>
-    <%= link_to "Edit your user", edit_user_path(@user) %>
-    </p>
-    <%= button_to "Delete your user", @user, method: :delete %>
-  </div>
+  <%= edit_and_destroy_buttons(@user) %>
 <% end %>

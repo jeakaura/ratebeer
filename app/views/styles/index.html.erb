@@ -1,18 +1,21 @@
-<div class="otsikko">
 <h1>Styles</h1>
-<p>Number of styles: <%= @styles.count %></p>
-<%= link_to "New style", new_style_path %>
-</div>
 
-<p style="color: green"><%= notice %></p>
-
-<div id="styles">
-<ul>
+<br/>
+<div class="row row-cols-1 row-cols-md-1 g-4">
   <% @styles.each do |style| %>
-    <li>
-      <p><b>Name:</b> <%= link_to style.text, style %></p>
-      <p><b>Desc:</b> <%= style.desc %></p>
-    </li>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title"><%= style.text %></h5>
+          <p class="card-text"><%= style.desc %></p>
+          <%= link_to "Read more", style, class:"btn btn-outline-primary btn-sm" %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</ul>
 </div>
+
+<p>
+<br/>
+  <%= link_to "New style", new_style_path, class:"btn btn-outline-primary" %>
+</p>

@@ -32,4 +32,9 @@ class User < ApplicationRecord
 
     beers.group(:brewery).order("count_brewery_id desc").count("brewery_id").keys[0]
   end
+
+  def self.top(maks = 3)
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |u| u.ratings.count }.reverse
+    sorted_by_rating_in_desc_order.first(maks)
+  end
 end

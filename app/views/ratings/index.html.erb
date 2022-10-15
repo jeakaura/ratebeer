@@ -1,14 +1,69 @@
-<div class="otsikko">
-     <h1>Ratings</h1>
-     <p>Number of ratings: <%= @ratings.count %></p>
-     <%= link_to('New Rating', new_rating_path) if current_user %>
+<h1>Ratings</h1>
+
+<br>
+<div class="container">
+<div class="row">
+<div class="col">
+  <h4>Best Beers</h4>
+  <ul class="list-group">
+    <% @top_beers.each do |beer| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+      <%= beer.name %>
+      <span class="badge bg-dark rounded-pill">avg <%= beer.average_rating %></span>
+      </li>
+    <% end %>
+  </ul>
+  </div>
+
+  <div class="col">
+  <h4>Best Breweries</h4>
+  <ul class="list-group">
+    <% @top_breweries.each do |brewery| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+      <%= brewery.name %>
+      <span class="badge bg-dark rounded-pill">avg <%= brewery.average_rating %></span>
+      </li>
+    <% end %>
+  </ul>
+  </div>
+
+<div class="col">
+  <h4>Best Styles</h4>
+  <ul class="list-group">
+    <% @top_styles.each do |s| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+      <%= s[0] %>
+      <span class="badge bg-dark rounded-pill">avg <%= s[1] %></span>
+      </li>
+    <% end %>
+  </ul>
+  </div>
+  </div>
 </div>
 
-<div class="sisalto">
-     <ul>
-          <% @ratings.each do |rating| %>
-               <li> <%= render rating %>
-               </li>
-          <% end %>
-     </ul>
-</div>
+<br><br>
+<h4>Most Active users</h4>
+<ol class="list-group list-group-numbered">
+<% @top_raters.each do |r| %>
+<li class="list-group-item">
+<%= r.username %> <%= r.ratings.count %> ratings
+</li>
+<% end %>
+</ol>
+
+<br><br>
+<h4>Recent Ratings</h4>
+<ul class="list-group">
+  <% @recent_ratings.each do |rating| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <div class="ms-2 me-auto">
+      <div class="fw-bold"><%= rating.beer.name %></div>
+      <%= rating.created_at %>
+    </div>
+    <span class="badge bg-dark rounded-pill">score <%= rating.score %></span>
+    </li>
+  <% end %>
+</ul>
+
+<br>
+<%= link_to('New Rating', new_rating_path, class:"btn btn-outline-primary") if current_user %>

@@ -1,5 +1,6 @@
 class StylesController < ApplicationController
   before_action :set_style, only: %i[show edit update destroy]
+  before_action :ensure_that_signed_in, except: [:index, :show]
 
   # GET /styles or /styles.json
   def index
@@ -49,11 +50,15 @@ class StylesController < ApplicationController
 
   # DELETE /styles/1 or /styles/1.json
   def destroy
-    @style.destroy
+    if current_user.admin == true
+      @style.destroy
 
-    respond_to do |format|
-      format.html { redirect_to styles_url, notice: "Style was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to styles_url, notice: "Style was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to styles_path, notice: "you should be admin!"
     end
   end
 
