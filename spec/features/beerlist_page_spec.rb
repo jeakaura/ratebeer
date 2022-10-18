@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Beerlist page" do
   before :all do
     Capybara.register_driver :selenium do |app|
-        Capybara::Selenium::Driver.new(app, :browser => :firefox)
+      Capybara::Selenium::Driver.new(app, :browser => :chrome)
     end
     WebMock.allow_net_connect!
   end
