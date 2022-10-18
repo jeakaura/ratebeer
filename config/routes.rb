@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   get 'styles_destroy/:id', to: 'styles#destroy', as: :delete_style
   get 'places', to: 'places#index'
   post 'places', to: 'places#search'
+  get 'beerlist', to: 'beers#list'
+  get 'brewerylist', to: 'breweries#list'
 end

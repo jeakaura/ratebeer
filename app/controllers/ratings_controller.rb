@@ -22,6 +22,7 @@ class RatingsController < ApplicationController
   end
 
   def create
+    expire_fragment('brewslist')
     @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
     @rating.user = current_user
 

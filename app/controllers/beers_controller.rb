@@ -1,15 +1,26 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: %i[show edit update destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list]
 
   # GET /beers or /beers.json
   def index
-    @beers = Beer.all
+    @order = params[:order] || 'name'
+    return if request.format.html? && fragment_exist?("beerlist-#{@order}")
+
+    @beers = Beer.includes(:brewery, :style, :ratings).all
+    @beers = case @order
+             when 'name' then @beers.sort_by(&:name)
+             when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
+             when 'style' then @beers.sort_by{ |b| b.style.text }
+             end
   end
 
   def set_breweries_and_styles_for_template
     @breweries = Brewery.all
     @styles = Style.all
+  end
+
+  def list
   end
 
   # GET /beers/1 or /beers/1.json
@@ -31,6 +42,7 @@ class BeersController < ApplicationController
 
   # POST /beers or /beers.json
   def create
+    expire_fragment('beerlist')
     @beer = Beer.new(beer_params)
 
     respond_to do |format|
@@ -47,6 +59,7 @@ class BeersController < ApplicationController
 
   # PATCH/PUT /beers/1 or /beers/1.json
   def update
+    expire_fragment('beerlist')
     respond_to do |format|
       if @beer.update(beer_params)
         format.html { redirect_to beer_url(@beer), notice: "Beer was successfully updated." }
@@ -60,6 +73,7 @@ class BeersController < ApplicationController
 
   # DELETE /beers/1 or /beers/1.json
   def destroy
+    expire_fragment('beerlist')
     @beer.destroy
 
     respond_to do |format|

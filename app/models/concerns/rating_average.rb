@@ -3,9 +3,12 @@ module RatingAverage
 
   # Laskee arvosteluiden keskiarvon.
   def average_rating
-    return 0 if ratings.empty?
+    # tehdään laskelmat muistiin haettujen olueen liittyvien ratings-olioiden avulla
+    rating_count = ratings.size
 
-    ratings.average(:score).round(1)
+    return 0 if rating_count == 0
+
+    ratings.map(&:score).sum / rating_count
   end
 
   # Laskee arvosteluiden lukumäärän.
